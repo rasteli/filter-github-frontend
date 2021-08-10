@@ -1,26 +1,53 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react"
+
+import api from "./services/api"
+import RepoItem from "./components/RepoItem"
+
+import "./App.css"
+import "./global.css"
+import "./Header.css"
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [repos, setRepos] = useState([])
+    const [query, setQuery] = useState("")
+    const [load, setLoad] = useState(false)
+
+    useEffect(() => {
+        async function loadRepos() {
+            const response = await api.get(`/repos?q=${query}`)
+
+            setRepos(response.data)
+        }
+
+        loadRepos()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [load])
+
+    return (
+        <>
+            <header>
+                <input
+                    type="text"
+                    className="query"
+                    placeholder="Search repositories"
+                    onChange={(e) => setQuery(e.target.value)}
+                />
+                <input
+                    type="button"
+                    value="Search"
+                    className="button"
+                    onClick={() => setLoad(!load)}
+                />
+            </header>
+            <div className="App">
+                <ul>
+                    {repos.map((repo) => (
+                        <RepoItem key={repo.id} repo={repo} />
+                    ))}
+                </ul>
+            </div>
+        </>
+    )
 }
 
-export default App;
+export default App

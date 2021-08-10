@@ -1,0 +1,38 @@
+.App ul {
+    box-shadow: 3px 3px 14px 0 rgba(0, 0, 0, 0.603);
+}
+
+header {
+    margin: 0 auto;
+    margin-top: 20px;
+    width: 200px;
+    box-shadow: 0 0 14px 0 rgba(0, 0, 0, 0.02);
+    border-radius: 2px;
+}
+
+header input[type="text"] {
+    width: 100%;
+    border: 0;
+    padding: 2px;
+    border-bottom: 1px rgba(0, 0, 0, 0.37) solid;
+    outline: none;
+    font-size: 16px;
+    background: #e5e6f0;
+}
+
+header input[type="button"] {
+    width: 100%;
+    border: 0;
+    margin-top: 10px;
+    background: #7d40e7;
+    border-radius: 2px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #eee;
+    cursor: pointer;
+}
+
+header input[type="button"]:hover {
+    background: #6931ca;
+}
